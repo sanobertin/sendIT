@@ -1,0 +1,28 @@
+{
+  "name": "sendit",
+  "version": "1.0.0",
+  "description": "Project Overview\r SendIT is a courier service that helps users deliver parcels to different destinations. SendIT\r provides courier quotes based on weight categories.",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanobertin/sendIT.git"
+  },
+  "author": "Bertin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanobertin/sendIT/issues"
+  },
+  "homepage": "https://github.com/sanobertin/sendIT#readme",
+  "directories": {
+    "test": "test"
+  }
+}
