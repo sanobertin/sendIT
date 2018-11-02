@@ -1,14 +1,29 @@
 <!doctype html>
 <html>
 <head>
+	<link rel="shortcut icon" href="pictures/logo.png" />
+	<link rel="stylesheet" href="css/design.css">
 	<title>User's Home</title>
 </head>
 <body>
-	<div>
-		<li>Create a new order</li>
-		<li>My orders</li>
+	<div class="tabbed-area">
+		<ul class="tabs group">
+			<li><a href='#new_order'>Create a new parcel delivery order</a></li>
+			<li><a href='#my_orders'>My orders</a></li>
+		</ul>
 
-	</div><br>
+		<div class="div-wrap">
+			<div id="new_order">
+				<p>New order contents here</p>
+			</div>
+			<div id='my_orders'>
+				<p>All order details here</p>
+			</div>
+		</div>
+
+	</div>
+
+
 	<div id="order_details">
 		<div>Order name: {}</div>
 		<div>
@@ -16,11 +31,12 @@
 			<p>Pickup location:{}</p>
 			<p>Destination: {}</p>
 			<p>Price:{}</p>
-			<button><span>Change Destination</span></button>
+			<p><button><span>Change Destination</span></button></p>
+			<p><button><span>Cancel this order</span></button></p>
 		</div>
 
-		<button><span>Cancel this order</span></button>
+		
 	</div>
-	
+
 </body>
 </html>
