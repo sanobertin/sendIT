@@ -6,16 +6,16 @@
 	<title>Sign Up</title>
 </head>
 <body>
-	<form name="signup_form">
+	<form name="signup_form" method="post" action="/signup">
 		<Legend class='legend'>Create an account</Legend>
 		<label>Full name:</label><br>
-		<input type="name" placeholder="Full name" required="required" class="input_size"><br>
+		<input type="name" placeholder="Full name" required="required" class="input_size" name="name"><br>
 		<label>Email:</label><br>
-		<input type="email" placeholder="Enter your email" required="required" class="input_size"><br>
+		<input type="email" placeholder="Enter your email" required="required" class="input_size" name="email"><br>
 		<label>Username:</label><br>
-		<input type="text" placeholder="Enter your username" required="required" class="input_size"><br>
+		<input type="text" placeholder="Enter your username" required="required" class="input_size" name='usern'><br>
 		<label>Password</label><br>
-		<input type="password" required="required" class="input_size"><br>
+		<input type="password" required="required" class="input_size" name="pass"><br>
 		<input type="submit" name="Sign Up" class="input_size"><br>
 	</form>
 	</body>
