@@ -2,9 +2,29 @@ const express= require('express');
 const app= express();
 const path= require('path')
 const fs= require('fs')
+
 app.use(express.static(path.join(__dirname+ '/UI')));
+//app.use(express.json());       // to support JSON-encoded bodies
+//app.use(express.urlencoded()); // to support URL-encoded bodies
+var bodyparser= require('body-parser').json()
 
 app.set('views', path.join(__dirname+ '/UI')) // specify the views directory
+
+ app.get('/api/v1/' , (req, res) =>{
+ 	console.log('GET: home')
+ 	res.sendFile('index.html' , {root: __dirname +'/UI'})
+ });
+
+  app.get('/api/v1/profile' , (req, res) =>{
+ 	console.log('GET: profile')
+ 	res.sendFile('profile.html' , {root: __dirname +'/UI'})
+ });
+
+   app.get('/api/v1/admin' , (req, res) =>{
+ 	console.log('GET: admin')
+ 	res.sendFile('admin.html' , {root: __dirname +'/UI'})
+ });
+
 
 
 app.route('/api/v1/signup')
@@ -13,6 +33,7 @@ app.route('/api/v1/signup')
     	console.log('GET: signup page')
         res.sendFile('signup.html', {root: __dirname +'/UI'})
     })
+
 
     
     .post(function(req, res, next) {
@@ -49,9 +70,28 @@ var parcels = [
 //End of data
 
 
+
+
 app.get('/api/v1/parcels', (req, res) => { // working
 	res.status(200).send(parcels);
 });
+
+app.post('/api/v1/parcels', bodyparser, (req, res) => {
+	res.setHeader("Content-type", "application/json")
+	newp = req.body.parcel;
+	if(Object.keys(newp).length==0){ //testing empty obj
+		console.log('empty object');
+		res.status(404).json({message:'Empty object!'});
+	}
+	else {
+		parcels.push(newp);
+		console.log('new parcel order Created');
+		console.log(parcels)
+		res.status(200).json({message:'OK'})
+	}
+	//res.end()
+});
+
 
 app.get('/api/v1/parcels/:parcel_ID', (req, res) => { // Working
 	parcel_ID= req.params.parcel_ID;
@@ -62,52 +102,66 @@ app.get('/api/v1/parcels/:parcel_ID', (req, res) => { // Working
 			res.end;
 			break;
 		}
-		else {res.status(500).end()}
+		else {res.status(404).end()}
 	}
 	//res.status(200).res.send('OK')
 });
 
-app.get('/api/v1/users/:userID', (req, res) => { // Working 
-	userID= req.params.userID;
-	for (var a=0; a < users.length; a++){
-		if(userID != users[a].username) { res.status(404).json({message: 'User doesnt exist'}); }
-		else if(userID==users[a].username){
-			console.log(toString(users[a].username) + ' fetched!!');
-			res.status(200).send(users[a]);
-			res.end();
-			break;
+app.put('/api/v1/parcels/:parcel_ID/cancel', (req, res) => { // Working
+	parcel_ID= req.params.parcel_ID;
+	for(var a=0;a<parcels.length;a++){
+		if(parcel_ID== parcels[a].parcelID){
+			console.log('ID found!')
+			if (parcels[a].status.toLowerCase() == "in transit"){
+				console.log('Status match!')
+				parcels[a].status= 'Canceled';
+				res.status(200).json({message: parcels[a]});
+			}
+			else {console.log('word doesnt match\n')}
 		}
-		//else { res.status(404).json({message: 'user does not exist'})}
+		//else{res.status(404).json({message:'Parcel doesnt exist or it has Delivered'})}
+		
 	}
-
-
+	console.log(parcels)
 });
 
-
-
-app.get('/api/v1/users/:userID/parcels', (req, res) => { // Working 
+app.get('/api/v1/users/:userID/', (req, res) => { // Working 
 	userID= req.params.userID;
 	for (var a=0; a < users.length; a++){
-		if(userID != users[a].username){ res.status(404).json({message: 'User doesnt exist'}); break;}
-		else if(userID==users[a].username){
-			console.log(toString(users[a].username) + ' fetched!!');
-			res.status(200).send(users[a]);
+		while(userID==users[a].username){
+			console.log(users[a].username + ' fetched!!');
+			res.status(200).json(users[a]);
 			res.end();
-			break;
+		}
+		//else { res.status(404).json({message: 'user does not exist'}).end()}
+	}
+	for (var a=0; a < users.length; a++){
+		while(userID != users[a].username){
+			console.log('User doesnt exist');
+			res.status(404).send('User doesnt exist');
+			res.end();
 		}
 		//else { res.status(404).json({message: 'user does not exist'}).end()}
 	}
 
 });
 
-app.put('/api/v1/parcels/:parcel_ID/cancel', (req, res) => { 
-	parcel_ID= req.params.parcel_ID;
-	
+app.get('/api/v1/users/:userID/parcels', (req, res) => { //working
+	userID= req.params.userID;
+	var temp= []
+	for (var a=0; a < users.length; a++){
+	if(userID==users[a].username){
+        for(var b=0; b<parcels.length;b++){
+			if(userID== parcels[b].owner){ temp.push(parcels[b]);} //returning parcels of a specific user
+        }
+    }
+	}
+	res.status(200).json(temp);
+	console.log(temp);
+	res.end()
+
 });
 
- /*p.get('/api/v1/admin', (req, res) => {
-	res.sendFile(path.join(__dirname+'/UI/admin.html'));
-}) */
 
 
 
