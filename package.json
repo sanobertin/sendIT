@@ -22,8 +22,9 @@
   "bugs": {
     "url": "https://github.com/sanobertin/sendIT/issues"
   },
-  "homepage": "https://github.com/sanobertin/sendIT#readme",
+  "homepage": "https://github.com/sanobertin/sendIT/api/v1",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "npm": "^6.4.1"
   },
