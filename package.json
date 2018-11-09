@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,10 +22,11 @@
   "bugs": {
     "url": "https://github.com/sanobertin/sendIT/issues"
   },
-  "homepage": "https://github.com/sanobertin/sendIT/api/v1",
+  "homepage": "https://github.com/sanobertin/sendIT/",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "mocha": "^5.2.0",
     "npm": "^6.4.1"
   },
   "devDependencies": {
