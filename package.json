@@ -6,7 +6,8 @@
   "directories": {
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
