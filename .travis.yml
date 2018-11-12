@@ -1,10 +1,9 @@
 language: node_js
 sudo: enabled
 install: true
-script:
-- npm test
+script:  npm test
 
 after_success: npm run coverage
 
 
-[![Build Status](https://travis-ci.org/sanobertin/sendIT.svg?branch=master)](https://travis-ci.org/sanobertin/sendIT)
+
