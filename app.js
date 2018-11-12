@@ -175,7 +175,7 @@ app.get('/api/v1/users/:userID/parcels', (req, res) => { // working
 
 port= process.env.PORT || 3000;
 app.listen(port);
-console.log('Server Is OK');
+console.log('Server Is OK on port '+port);
 
 
 module.exports = app;
