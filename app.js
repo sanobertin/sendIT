@@ -1,3 +1,4 @@
+
 const express = require('express');
 
 const app = express();
@@ -94,7 +95,6 @@ app.get('/api/v1/parcels', (req, res) => { // working
 });
 
 app.post('/api/v1/parcels', bodyparser, (req, res) => {
-  res.setHeader('Content-type', 'application/json');
   newp = req.body.parcel;
   if (Object.keys(newp).length == 0) { // testing empty obj
     console.log('empty object');
@@ -105,7 +105,6 @@ app.post('/api/v1/parcels', bodyparser, (req, res) => {
     console.log(parcels);
     res.status(200).json({ message: 'OK' });
   }
-  // res.end()
 });
 
 
@@ -114,10 +113,11 @@ app.get('/api/v1/parcels/:parcel_ID', (req, res) => { // Working
   for (let a = 0; a < parcels.length; a++) {
     if (parcel_ID == parcels[a].parcelID) {
       console.log(`${toString(parcels[a].parcelID)} fetched!`);
-      res.status(200).send(parcels[a]);
-      res.end;
+      resp = Object(parcels[a]);
+      return res.status(200).json(resp);
+
       break;
-    } else { res.status(404).end(); }
+    } res.status(404).end();
   }
   // res.status(200).res.send('OK')
 });
@@ -130,7 +130,7 @@ app.put('/api/v1/parcels/:parcel_ID/cancel', (req, res) => { // Working
       if (parcels[a].status.toLowerCase() == 'in transit') {
         console.log('Status match!');
         parcels[a].status = 'Canceled';
-        res.status(200).json({ message: parcels[a] });
+        res.status(200).json({ message: 'Success' });
       } else { console.log('word doesnt match\n'); }
     }
     // else{res.status(404).json({message:'Parcel doesnt exist or it has Delivered'})}
@@ -171,17 +171,19 @@ app.get('/api/v1/users/:userID/parcels', (req, res) => { // working
   res.status(200).json(temp);
   console.log(temp);
   res.end();
-});
+})
+port = process.env.PORT || 3000;
+app.listen(port);
+console.log(`Server Is OK on port ${port}`);
 
-<<<<<<< HEAD
+
 port= process.env.PORT || 3000;
 app.listen(port);
 console.log('Server Is OK on port '+port);
-=======
+
 
 app.listen(3000);
 console.log('Server Is OK on port ');
->>>>>>> editor
 
 
 module.exports = app;

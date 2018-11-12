@@ -24,11 +24,14 @@
   "homepage": "https://github.com/sanobertin/sendIT/",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "expect.js": "^0.3.1",
     "express": "^4.16.4",
     "mocha": "^5.2.0",
-    "npm": "^6.4.1"
+    "npm": "^6.4.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0"
