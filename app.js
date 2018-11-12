@@ -173,9 +173,15 @@ app.get('/api/v1/users/:userID/parcels', (req, res) => { // working
   res.end();
 });
 
+<<<<<<< HEAD
 port= process.env.PORT || 3000;
 app.listen(port);
 console.log('Server Is OK on port '+port);
+=======
+
+app.listen(3000);
+console.log('Server Is OK on port ');
+>>>>>>> editor
 
 
 module.exports = app;
