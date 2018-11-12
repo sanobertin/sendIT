@@ -171,11 +171,19 @@ app.get('/api/v1/users/:userID/parcels', (req, res) => { // working
   res.status(200).json(temp);
   console.log(temp);
   res.end();
-});
-
+})
 port = process.env.PORT || 3000;
 app.listen(port);
 console.log(`Server Is OK on port ${port}`);
+
+
+port= process.env.PORT || 3000;
+app.listen(port);
+console.log('Server Is OK on port '+port);
+
+
+app.listen(3000);
+console.log('Server Is OK on port ');
 
 
 module.exports = app;

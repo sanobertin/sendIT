@@ -1,5 +1,10 @@
 language: node_js
-sudo: disabled
+sudo: enabled
+install: true
+script:
+- echo "Skiping Testing
+
 after_success: npm run coverage
+
 
 [![Build Status](https://travis-ci.org/sanobertin/sendIT.svg?branch=master)](https://travis-ci.org/sanobertin/sendIT)

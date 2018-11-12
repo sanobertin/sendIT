@@ -22,3 +22,7 @@ NB:
   1. The user can only cancel or change the destination of a parcel delivery when the parcel’s
   status is yet to be marked as delivered .
   2. Only the user who created the parcel delivery order can cancel the order.
+
+[![Coverage Status](https://coveralls.io/repos/github/sanobertin/sendIT/badge.svg?branch=master)](https://coveralls.io/github/sanobertin/sendIT?branch=master)
+
+[![Build Status](https://travis-ci.org/sanobertin/sendIT.svg?branch=master)](https://travis-ci.org/sanobertin/sendIT)

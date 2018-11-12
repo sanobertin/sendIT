@@ -4,7 +4,6 @@
   "description": "An application for creating parcel orders",
   "main": "app.js",
   "directories": {
-    "test": "test"
   },
   "scripts": {
     "start": "node app.js",
