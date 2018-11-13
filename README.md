@@ -24,3 +24,10 @@ cd sendIT <br />
 run: npm start<br />
 run: npm test  for test development <br />
 
+Template hosting site: <br />
+https://sanobertin.github.io/sendIT/UI  >> index page <br />
+https://sanobertin.github.io/sendIT/admin.html  >> admin panel <br />
+https://sanobertin.github.io/sendIT/profile.html  >>  profile page <br />
+https://sanobertin.github.io/sendIT/UI/signin.html  >> Sign in page <br />
+https://sanobertin.github.io/sendIT/UI/signup.html  >> Sign up page <br />
+
