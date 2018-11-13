@@ -1,3 +1,10 @@
+[![Build Status](https://travis-ci.org/sanobertin/sendIT.svg?branch=editor)](https://travis-ci.org/sanobertin/sendIT)
+[![Coverage Status](https://coveralls.io/repos/github/sanobertin/sendIT/badge.svg?branch=master)](https://coveralls.io/github/sanobertin/sendIT?branch=master)
+
+
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/b9730dc36784773c6953/maintainability)](https://codeclimate.com/github/sanobertin/sendIT/maintainability)
+
 Project Overview
 SendIT is a courier service that helps users deliver parcels to different destinations. SendIT
 provides courier quotes based on weight categories.
@@ -23,6 +30,4 @@ NB:
   status is yet to be marked as delivered .
   2. Only the user who created the parcel delivery order can cancel the order.
 
-[![Coverage Status](https://coveralls.io/repos/github/sanobertin/sendIT/badge.svg?branch=master)](https://coveralls.io/github/sanobertin/sendIT?branch=master)
 
-[![Build Status](https://travis-ci.org/sanobertin/sendIT.svg?branch=master)](https://travis-ci.org/sanobertin/sendIT)

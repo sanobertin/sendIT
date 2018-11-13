@@ -102,8 +102,8 @@ app.post('/api/v1/parcels', bodyparser, (req, res) => {
   } else {
     parcels.push(newp);
     console.log('new parcel order Created');
-    console.log(parcels);
-    res.status(200).json({ message: 'OK' });
+    console.log(parcels[this.length -1]);
+    res.status(201).json({ message: 'OK' });
   }
 });
 
@@ -175,15 +175,6 @@ app.get('/api/v1/users/:userID/parcels', (req, res) => { // working
 port = process.env.PORT || 3000;
 app.listen(port);
 console.log(`Server Is OK on port ${port}`);
-
-
-port= process.env.PORT || 3000;
-app.listen(port);
-console.log('Server Is OK on port '+port);
-
-
-app.listen(3000);
-console.log('Server Is OK on port ');
 
 
 module.exports = app;

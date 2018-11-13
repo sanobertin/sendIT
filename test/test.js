@@ -1,16 +1,14 @@
 const assert = require('assert');
+//import chaiHttp from 'chai-http';
+chaiHttp= require('chai-http')
 const expect= require('expect.js')
 const app = require('../app.js');
 const request = require("request");
+const chai= require('chai')
+chai.use(chaiHttp);
+let base_url = "http://localhost:3000/api/v1"
 
-var base_url = "http://localhost:3000/api/v1"
 
-let User = {
-   _id:1,
-   name:'',
-   email:'',
-   password:''
-};
 
 describe("List all parcels", function() {//working
      it("GET/ returns status code 200", function(done) {
@@ -63,13 +61,19 @@ describe("PUT/ Change the status of a parcel", () => {  //working
 	});
 })
 
-/*describe("POST/ Creating a new order parcel", () => {  //working
-	it("should insert new details with status 200", (done) =>{
-		let parcel= { parcelID: 6, owner: 'bertin', parcelName: 'Parcel 6', status: 'In transit' }
-		request.post(base_url+'/api/v1/parcels', {body: {"parcel": parcel}}, (error, response, body) => {
-
-			expect(response.statusCode).to.be(200)
+describe("POST/ Creating a new order parcel", () => { // Working
+	it("should insert new details with status 201", (done) =>{
+		let parcel= { parcelID: 6, owner: 'bertin', parcelName: 'Parcel 6', status: 'In transit' };
+		chai.request(app)
+          .post(base_url+ 'parcels/')
+          .send(parcel)
+          .then(res => {
+            expect(res).to.have.status(201);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('success').eql(true);
+            expect(res.body).to.have.property('parcelId');
+            expect(res.body).to.have.property('price'); });
+			
 			done()
 		})
 	})
-}) */
