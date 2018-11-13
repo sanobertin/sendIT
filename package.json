@@ -6,7 +6,7 @@
   "directories": {},
   "scripts": {
     "start": "node app.js",
-    "test": "mocha",
+    "test": "mocha --exit",
     "coverage": "coveralls"
   },
   "repository": {
