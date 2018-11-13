@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "An application for creating parcel orders",
   "main": "app.js",
-  "directories": {
-  },
+  "directories": {},
   "scripts": {
     "start": "node app.js",
     "test": "mocha"
@@ -31,6 +30,8 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "coveralls": "^3.0.2",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
