@@ -12,12 +12,7 @@ const bodyparser = require('body-parser').json();
 
 app.set('views', path.join(`${__dirname}/UI`)); // specify the views directory
 
-app.get('/api/v1/', (req, res) => {
- 	console.log('GET: home');
- 	res.sendFile('index.html', { root: `${__dirname}/UI` });
-});
-
-app.get('/api/v1/profile', (req, res) => {
+ /* app.get('/api/v1/profile', (req, res) => {
  	console.log('GET: profile');
  	res.sendFile('profile.html', { root: `${__dirname}/UI` });
 });
@@ -25,10 +20,10 @@ app.get('/api/v1/profile', (req, res) => {
 app.get('/api/v1/admin', (req, res) => {
  	console.log('GET: admin');
  	res.sendFile('admin.html', { root: `${__dirname}/UI` });
-});
+}); */
 
 
-app.route('/api/v1/signup')
+/*app.route('/api/v1/signup')
 
   .get((req, res) => {
     	console.log('GET: signup page');
@@ -48,12 +43,12 @@ app.route('/api/v1/signup')
     }), (error) => { if (error) console.log(error); });
     res.status(200).json({ message: ' Succeed!' });
     res.end();
-  });
+  }); */
 
-app.route('/api/v1/signin')
+/*app.route('/api/v1/signin')
   .get((req, res) => {
     res.sendFile('signin.html', { root: `${__dirname}/UI` });
-  });
+  });*/
 // Data
 const admin = {
   name: 'admin', email: 'Admin@sendit.dv', usernname: 'admin', password: 'admin1234', right: 'admin',
