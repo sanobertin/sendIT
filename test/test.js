@@ -13,7 +13,7 @@ let base_url = "http://localhost:3000/api/v1"
 describe("List all parcels", function() {//working
      it("GET/ returns status code 200", function(done) {
          request.get(base_url+'/parcels', function(error, response, body) {
-         expect(response.statusCode).to.be(200);
+         expect(response.statusCode).to.be(200); 
          done();
      });
 })
