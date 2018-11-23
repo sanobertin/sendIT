@@ -4,4 +4,4 @@ before_script:
   - npm install 
 
 after_success: 
-- echo "Success"
+- npm run coverage
