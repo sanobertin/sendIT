@@ -34,11 +34,20 @@ router.get('/api/v1/parcels/:parcel_ID', (req, res) => { // Working *2
 });
 
 router.put('/api/v1/parcels/:parcel_ID/cancel', (req, res) => { // Working not as i need
-	parcel_ID = req.params.parcel_ID;
-	for (let a = 0; a < parcels.length; a++) {
+	parcel_ID = parseInt(req.params.parcel_ID);
+	let fp= parcels.find(parcel => parcel.parcelID===parcel_ID);
+	if(fp===undefined){
+		res.status(404).json({message:'Parcel not found'})
+	} else if(fp.status !== 'In transit'){
+		res.status(404).json({message:'Parcel either Delivered or already canceled'})
+	} else {
+		fp.status='Canceled'
+		res.status(200).json({message:"Successfully updated"});
+	}
+
+	/*for (let a = 0; a < parcels.length; a++) {
 		if (parcel_ID == parcels[a].parcelID) {
 		  console.log('ID found!');
-
 		  if (parcels[a].status.toLowerCase() == 'in transit') {
 		    console.log('Status match!');
 		    parcels[a].status = 'Canceled';
@@ -47,7 +56,7 @@ router.put('/api/v1/parcels/:parcel_ID/cancel', (req, res) => { // Working not a
 		} else{
 			res.status(404).json({message:'Parcel doesnt exist or it has Delivered'})}
 	}
-	console.log(parcels);
+	console.log(parcels); */
 });
 
 
