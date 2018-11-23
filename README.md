@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/sanobertin/sendIT.svg?branch=editor)](https://travis-ci.org/sanobertin/sendIT) <br />
+[![Build Status](https://travis-ci.org/sanobertin/sendIT.svg?branch=develop)](https://travis-ci.org/sanobertin/sendIT) <br />
 
-[![Coverage Status](https://coveralls.io/repos/github/sanobertin/sendIT/badge.svg?branch=master)](https://coveralls.io/github/sanobertin/sendIT?branch=master) <br />
+[![Coverage Status](https://coveralls.io/repos/github/sanobertin/sendIT/badge.svg?branch=develop)](https://coveralls.io/github/sanobertin/sendIT?branch=master) <br />
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/b9730dc36784773c6953/maintainability)](https://codeclimate.com/github/sanobertin/sendIT/maintainability) <br />
 
@@ -26,8 +26,8 @@ run: npm test  for test development <br />
 
 Template hosting site: <br />
 https://sanobertin.github.io/sendIT/UI  >> index page <br />
-https://sanobertin.github.io/sendIT/admin.html  >> admin panel <br />
-https://sanobertin.github.io/sendIT/profile.html  >>  profile page <br />
-https://sanobertin.github.io/sendIT/UI/signin.html  >> Sign in page <br />
-https://sanobertin.github.io/sendIT/UI/signup.html  >> Sign up page <br />
+/admin.html  >> admin panel <br />
+/profile.html  >>  profile page <br />
+/signin.html  >> Sign in page <br />
+/signup.html  >> Sign up page <br />
 

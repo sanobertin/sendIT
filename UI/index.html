@@ -6,6 +6,9 @@
 	<title>User's Home</title>
 </head>
 <body>
+	<div class="header">
+		<h1>Ship your parcels in simple and flexible way</h1>
+	</div>
 	<div class="tabbed-area">
 		<ul class="tabs group">
 			<li><a href='#new_order'>Create a new parcel delivery order</a></li>
@@ -15,12 +18,12 @@
 		<div class="div-wrap">
 			<div id="new_order">
 				<form>
-					<label>From:</label><br>
-					<input class="input_size" id="pickup_loc"><br>
-					<label>To:</label><br>
-					<input class="input_size" id="destination_loc"><br>
+					<label>Pickup location:</label><br>
+					<input class="input_size" id="pickup_loc" required="required"><br>
+					<label>Destination:</label><br>
+					<input class="input_size" id="destination_loc" required="required"><br>
 					<label>Describe this shipment</label><br>
-					<input type="text" class="input_size"><br>
+					<input type="text" class="input_size" required="required"><br>
 					<label>Weight</label><br>
 					<input type="number" class="input_size"><br>
 					<button class="input_size"><span>Get Quotes</span></button>
@@ -29,6 +32,12 @@
 			</div>
 			<div id='my_orders'>
 				<p>All order details here</p>
+				<p>Parcel 2 (Order name, Status, Pickup location, present location, Destination)</p>
+				<p>Parcel 3 (Order name, Status, Pickup location, present location, Destination)</p>
+				<p>Parcel 4 (Order name, Status, Pickup location, present location, Destination)</p>
+				<p>Parcel 5 (Order name, Status, Pickup location, present location, Destination)</p>
+				<p>Parcel 6 (Order name, Status, Pickup location, present location, Destination)</p>
+
 			</div>
 		</div>
 
@@ -36,18 +45,16 @@
 
 
 	<div id="order_details">
-		<div>Order name: {}</div>
-		<div>
-			<p><b>Details:</b></p>
-			<p>Pickup location:{}</p>
-			<p>Destination: {}</p>
-			<p>Price:{}</p>
-			<p><button><span>Change Destination</span></button></p>
-			<p><button><span>Cancel this order</span></button></p>
-		</div>
+		<p> View a particular parcel order</p>
+		<p><span>Parcel 2 (Order name</span>, <span>Status</span>, <span>Pickup location</span>, <span>present location</span>, <span>Destination)</span></p>
+
+		<p>
+			<span><button>Change Destination</button></span>
+			<span><button>Cancel this order</button></span>
+		</p>
 
 		
 	</div>
-
+<footer class='footer'>sendIT	copyright	2018</footer>
 </body>
 </html>

@@ -13,7 +13,7 @@ let base_url = "http://localhost:3000/api/v1"
 describe("List all parcels", function() {//working
      it("GET/ returns status code 200", function(done) {
          request.get(base_url+'/parcels', function(error, response, body) {
-         expect(response.statusCode).to.be(200);
+         expect(response.statusCode).to.be(200); 
          done();
      });
 })
@@ -54,11 +54,17 @@ describe("GET/ all parcels from a particular user", function() { //working
 describe("PUT/ Change the status of a parcel", () => {  //working
 	it("should change the status of order", (done) =>{
 		request.put(base_url+'/parcels/5/cancel', (error, response, body) => {
-			expect(response.statusCode).to.be(200)
-			//expect(response.body).to.have.property('message')
-			done()
+			expect(response.statusCode).to.be(200);
+            done();
 		})
 	});
+    it("should return error 404 if parcel not found or can't be canceled", (done) =>{
+        request.put(base_url+'/parcels/5/cancel', (error, response, body) => {
+            expect(response.statusCode).to.be(404);
+            done()
+        })
+    });
+
 })
 
 describe("POST/ Creating a new order parcel", () => { // Working

@@ -2,12 +2,16 @@
 <html>
 <head>
 	<link rel="shortcut icon" href="pictures/logo.png" />
-	<link rel='stylesheet' href='/css/design.css'>
+	<link rel='stylesheet' href='css/design.css'>
 	<title>Sign Up</title>
 </head>
 <body>
+	<div class="header">
+		<h1>Ship your parcels in simple and flexible way</h1>
+	</div>
+	<div class='form-signup'>
 	<form name="signup_form" method="post" action="/api/v1/signup">
-		<Legend class='legend'>Create an account</Legend>
+		<Legend class='legend'><b>Create an account</b></Legend>
 		<label>Full name:</label><br>
 		<input type="name" placeholder="Full name" required="required" class="input_size" name="name"><br>
 		<label>Email:</label><br>
@@ -18,5 +22,8 @@
 		<input type="password" required="required" class="input_size" name="pass"><br>
 		<input type="submit" name="Sign Up" class="input_size"><br>
 	</form>
+</div>
+	<footer class='footer'>sendIT	copyright	2018</footer>
 	</body>
+
 </html>
