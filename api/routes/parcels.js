@@ -44,8 +44,8 @@ router.put('/api/v1/parcels/:parcel_ID/cancel', (req, res) => { // Working not a
 		    parcels[a].status = 'Canceled';
 		    res.status(200).json({ message: 'Success' });
 		  } else { console.log('word doesnt match\n'); }
-		}
-	// else{res.status(404).json({message:'Parcel doesnt exist or it has Delivered'})}
+		} else{
+			res.status(404).json({message:'Parcel doesnt exist or it has Delivered'})}
 	}
 	console.log(parcels);
 });
