@@ -1,22 +1,23 @@
-const express= require('express')
-const router = express.Router()
+const express = require('express');
+
+const router = express.Router();
 const bodyparser = require('body-parser').json();
-const parcels= require('../models/db').parcels
-const users= require('../models/db').users
-const path= require('path')
+const parcels = require('../models/db').parcels;
+const users = require('../models/db').users;
+const path = require('path');
 
 router.get('/api/v1/', (req, res) => {
  	res.sendFile('index.html', { root: './UI' });
 });
 
 router.get('/api/v1/profile', (req, res) => {
- 	//console.log('GET: profile');
- 	res.sendFile('profile.html', {root: './UI' });
+ 	// console.log('GET: profile');
+ 	res.sendFile('profile.html', { root: './UI' });
 });
 
 router.get('/api/v1/admin', (req, res) => {
  	console.log('GET: admin');
- 	res.sendFile('admin.html', {root: './UI' });
+ 	res.sendFile('admin.html', { root: './UI' });
 });
 
 
@@ -48,6 +49,4 @@ router.route('/api/v1/signin')
   });
 
 
-
-
-module.exports= router
+module.exports = router;

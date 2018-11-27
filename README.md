@@ -11,7 +11,7 @@ provides courier quotes based on weight categories.<br />
 Access to all API endpoints<br />
 
 GET: /api/v1/parcels           >> Fetch all parcel delivery orders<br />
-GET: /api/v1/parcels<parcelId>   >>Fetch a specific parcel delivery order<br />
+GET: /api/v1/parcels/&lt;parcelId&gt;   >>Fetch a specific parcel delivery order<br />
 GET: /api/v1/users/<usersId>/parcels  >>Fetch all parcel delivery orders by a specific user<br />
 PUT: /api/v1/parcels<parcelID>/cancel >>Cancel the specific parcel delivery order<br />
 POST: /api/v1/parcels >> Create a parcel delivery order<br />
