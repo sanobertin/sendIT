@@ -17,9 +17,7 @@ router.post('/api/v1/parcels', bodyparser, (req, res) => {
     res.status(404).json({ message: 'Empty object!' });
   } else {
     parcels.push(newp);
-    console.log('new parcel order Created');
-    //console.log(parcels[this.length -1]);
-    res.status(201).json({ message: 'Created' });
+    res.status(201).json({ message: 'Created', newParcel: newp});
   }
 });
 
