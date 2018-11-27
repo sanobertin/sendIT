@@ -13,7 +13,7 @@ users.push({
   name: 'user2', email: 'user2@sendit.dv', username: 'user2', password: 'admin1234', right: 'user',
 });
 
-//comment, price attribute on parcels
+//comment, price attribute on parcels, present location
 const parcels = [
   {
     parcelID: 1, owner: users[1].username, parcelName: 'Parcel 1',  from: 'Kigali', to:'Huye', status: 'Delivered',
