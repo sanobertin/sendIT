@@ -2,7 +2,9 @@ const parcels= require('../models/db').parcels
 const users= require('../models/db').users
 const express = require('express');
 const router = express.Router()
-
+const jwt= require('jsonwebtoken')
+require('dotenv').config()
+jwtkey= process.env.jwtkey;
 router.get('/api/v1/users/:userID/', (req, res) => { // Working
   userID = req.params.userID;
   for (let a = 0; a < users.length; a++) {
@@ -20,6 +22,7 @@ router.get('/api/v1/users/:userID/', (req, res) => { // Working
     // else { res.status(404).json({message: 'user does not exist'}).end()}
   }
 });
+let getSpecificUserQuery= `SELECT * from parcels where userID=${userID}`;
 
 router.get('/api/v1/users/:userID/parcels', (req, res) => { // working **2 
   userID = req.params.userID;
@@ -36,6 +39,15 @@ router.get('/api/v1/users/:userID/parcels', (req, res) => { // working **2
   res.status(200).json(temp);
   //console.log(temp);
   res.end();
+})
+let getAllParcelsFromSpecificUserQuery=`SELECT * from parcels where userID=${userID}`; //userid as foreign key in parcels db
+
+router.post('/api/v1/auth/signup', (req, res) =>{
+  // new rules for adding a creating a user in db
+})
+let createNewUserQuery=`INSERT INTO users(name, email, username, password, right) VALUES`; // deciding a primary key
+router.post('/api/v1/auth/login', (req, res) =>{
+  // new rules for logging in a user
 })
 
 module.exports= router

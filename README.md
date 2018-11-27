@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/sanobertin/sendIT.svg?branch=develop)](https://travis-ci.org/sanobertin/sendIT) <br />
 
-[![Coverage Status](https://coveralls.io/repos/github/sanobertin/sendIT/badge.svg?branch=develop)](https://coveralls.io/github/sanobertin/sendIT?branch=master) <br />
+[![Coverage Status](https://coveralls.io/repos/github/sanobertin/sendIT/badge.svg?branch=develop)](https://coveralls.io/github/sanobertin/sendIT?branch=develop) <br />
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/b9730dc36784773c6953/maintainability)](https://codeclimate.com/github/sanobertin/sendIT/maintainability) <br />
 

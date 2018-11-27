@@ -13,7 +13,7 @@ users.push({
   name: 'user2', email: 'user2@sendit.dv', username: 'user2', password: 'admin1234', right: 'user',
 });
 
-//comment, price attribute on parcels
+//comment, price attribute on parcels, present location
 const parcels = [
   {
     parcelID: 1, owner: users[1].username, parcelName: 'Parcel 1',  from: 'Kigali', to:'Huye', status: 'Delivered',
@@ -40,5 +40,21 @@ client.connect()
 let createtablequery= 'CREATE TABLE items(parcelID PRIMARY KEY not null, owner text VARCHAR(40) not null, parcelName VARCHAR(40) not null, from text VARCHAR(40) not null, to text VARCHAR(40) not null, status text VARCHAR(40) not null )'
 client.query(createtablequery);
 client.end()
+
+/*const { Client } = require('pg')
+connString= process.env.DATABASE_URL || 'postgres://localhost:5432/db'
+const client = new Client(connString)
+client.connect()
+let createtablequery= 'CREATE TABLE items(
+parcelID PRIMARY KEY not null,\ 
+owner text VARCHAR(40) not null,\
+parcelName VARCHAR(40) not null,\
+from text VARCHAR(40) not null, \
+to text VARCHAR(40) not null, \
+status text VARCHAR(40) not null )'
+
+client.query(createtablequery);
+client.end() */
+
 
 module.exports= {parcels, users}
