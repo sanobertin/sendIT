@@ -59,7 +59,7 @@ describe("PUT/ Change the status of a parcel", () => {  //working
 		})
 	});
     it("should return error 404 if parcel not found or can't be canceled", (done) =>{
-        request.put(base_url+'/parcels/5/cancel', (error, response, body) => {
+        request.put(base_url+'/parcels/1/cancel', (error, response, body) => {
             expect(response.statusCode).to.be(404);
             done()
         })

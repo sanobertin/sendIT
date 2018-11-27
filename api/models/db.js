@@ -37,9 +37,14 @@ const parcels = [
 connString= process.env.DATABASE_URL || 'postgres://localhost:5432/db'
 const client = new Client(connString)
 client.connect()
-let createtablequery= 'CREATE TABLE items(parcelID PRIMARY KEY not null,\ 
-owner text VARCHAR(40) not null, parcelName VARCHAR(40) not null,\
- from text VARCHAR(40) not null, to text VARCHAR(40) not null, status text VARCHAR(40) not null )'
+let createtablequery= 'CREATE TABLE items(
+parcelID PRIMARY KEY not null,\ 
+owner text VARCHAR(40) not null,\
+parcelName VARCHAR(40) not null,\
+from text VARCHAR(40) not null, \
+to text VARCHAR(40) not null, \
+status text VARCHAR(40) not null )'
+
 client.query(createtablequery);
 client.end() */
 

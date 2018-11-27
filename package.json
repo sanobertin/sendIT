@@ -6,8 +6,8 @@
   "directories": {},
   "scripts": {
     "start": "node app.js",
-    "test": "mocha --exit",
-    "coveralls": "coveralls"
+    "test": "nyc --reporter=html --reporter=text mocha --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "mocha": "^5.2.0",
     "npm": "^6.4.1",
     "nyc": "^13.1.0",
+    "pg": "^7.6.1",
     "request": "^2.88.0"
   },
   "devDependencies": {
