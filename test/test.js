@@ -10,59 +10,78 @@ let base_url = "http://localhost:3000/api/v1" //change
 
 
 
-describe("List all parcels", function() {//working
-     it("GET/ returns status code 200", function(done) {
+describe("List all parcels", function() {
+     it("should have parcels property with status 200", function(done) {
          request.get(base_url+'/parcels', function(error, response, body) {
-         expect(response.statusCode).to.be(200); 
-         done();
-     });
-})
+         expect(response.statusCode).to.be(200);
+         expect(JSON.parse(response.body)).to.have.property('parcels'); 
+         done();})
+    });
+    
 });
 
-describe("List a particular parcel", function() {// working
-     it("GET/ returns status code 200 with valid entries", function(done) {
+
+
+describe("List a particular parcel", function() {
+     it("GET/ returns status code 200", function(done) {
 	     request.get(base_url+'/parcels'+'/1', function(error, response, body) {
 	     expect(response.statusCode).to.be(200);
-	     expect(response.body).to.not.be('empty')
-
-	     done();
+        done();})
      });
-})
+
+     it('should have property parcel', (done)=>{
+        request.get(base_url+'/parcels'+'/1', (error, response, body) =>{
+            expect(JSON.parse(response.body)).to.have.property('parcel');
+            done();})
+     });
+
 });
 
-describe("GET/ Fetch a particular user", function() { //working
-     it("should return a specific user", function(done) {
+describe("GET/ Fetch a particular user", function() {
+     it("should return status 200", function(done) {
          request.get(base_url+'/users/bertin', function(error, response, body) {
-         expect(response.statusCode).to.be(200);
-         expect(response.body).to.not.be('empty')
-         //expect(response.body).to.have.property('name')
-         done();
+         expect(response.statusCode).to.be(200);   
+         done(); })
+     });
+     it('should have property user', (done)=>{
+        request.get(base_url+'/users/bertin', (error, response, body) =>{
+            expect(JSON.parse(response.body)).to.have.property('user'); 
+            done();})
+     });
+     it('user property should not be empty', (done)=>{
+        request.get(base_url+'/users/bertin', (error, response, body) =>{
+            expect(response.body.user).to.not.be('empty');
+            done();})
      });
 })
-});
 
-describe("GET/ all parcels from a particular user", function() { //working
+
+describe("GET/ all parcels from a particular user", function() { 
+    //some
      it("should return 200 status with array of parcels", function(done) {
          request.get(base_url+'/users/bertin/parcels', function(error, response, body) {
          expect(response.statusCode).to.be(200);
-         expect(response.body).to.not.be('empty')
-         done();
-     });
-})
+         done();})
+    })
 }); 
 
-describe("PUT/ Change the status of a parcel", () => {  //working
-	it("should change the status of order", (done) =>{
+describe("PUT/ Change the status of a parcel", () => { 
+	it("should return status 200", (done) =>{
 		request.put(base_url+'/parcels/5/cancel', (error, response, body) => {
-			expect(response.statusCode).to.be(200);
-            done();
-		})
-	});
+            expect(response.statusCode).to.be(200);
+            done();})
+    });
+    it('should have property message', (done)=>{
+        request.put(base_url+'/parcels/5/cancel', (error, response, body) =>{
+            expect(JSON.parse(response.body)).to.have.property('message'); 
+            done(); })
+     });
+
+
     it("should return error 404 if parcel not found or can't be canceled", (done) =>{
         request.put(base_url+'/parcels/1/cancel', (error, response, body) => {
             expect(response.statusCode).to.be(404);
-            done()
-        })
+            done()})
     });
 
 })

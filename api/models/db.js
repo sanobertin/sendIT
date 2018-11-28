@@ -1,5 +1,3 @@
-// This where you can find db
-// Data
 const users = [{
   name: 'Admin', email: 'Admin@sendit.dv', username: 'admin', password: 'admin1234', right: 'admin',
 },
@@ -12,47 +10,45 @@ const users = [{
 ];
 const parcels = [
   {
-    parcelID: 1, owner: users[1].username, parcelName: 'Parcel 1', from: 'Kigali', to: 'Huye', status: 'Delivered',
+    parcelID: 1, owner: 'bertin', parcelName: 'Parcel 1', from: 'Kigali', to: 'Huye', status: 'Delivered',
   },
   {
-    parcelID: 2, owner: users[2].username, parcelName: 'Parcel 2', from: 'Kigali', to: 'Rwamagana', status: 'In transit',
+    parcelID: 2, owner: 'user2', parcelName: 'Parcel 2', from: 'Kigali', to: 'Rwamagana', status: 'In transit',
   },
   {
-    parcelID: 3, owner: users[1].username, parcelName: 'Parcel 3', from: 'Bugesera', to: 'Kibungo', status: 'Canceled',
+    parcelID: 3, owner: 'bertin', parcelName: 'Parcel 3', from: 'Bugesera', to: 'Kibungo', status: 'Canceled',
   },
   {
-    parcelID: 4, owner: users[2].username, parcelName: 'Parcel 4', from: 'Muhanga', to: 'Kigali', status: 'Delivered',
+    parcelID: 4, owner: 'user2', parcelName: 'Parcel 4', from: 'Muhanga', to: 'Kigali', status: 'Delivered',
   },
   {
-    parcelID: 5, owner: users[1].username, parcelName: 'Parcel 5', from: 'Musanze', to: 'Rubavu', status: 'In transit',
+    parcelID: 5, owner: 'bertin', parcelName: 'Parcel 5', from: 'Musanze', to: 'Rubavu', status: 'In transit',
   },
 ];
 // End of data
 require('dotenv').config();
 
 const cs = `postgres://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`;
-console.log(cs);
 const createtParcelsTableQuery = 'CREATE TABLE parcels IF NOT EXISTS('
 + 'parcelID SERIAL,'
-+ 'owner text VARCHAR(100) not null,'
-+ 'parcelName VARCHAR(100) not null,'
-+ 'from text VARCHAR(100) not null, '
-+ 'to text VARCHAR(100) not null, '
-+ 'presentLocation VARCHAR(100) not null'
-+ 'price DECIMAL(600, 3) not null'
-+ 'status text VARCHAR(100) not null )'
++ 'owner text TEXT NOT NULL,'
++ 'parcelName TEXT NOT NULL,'
++ 'from text TEXT NOT NULL, '
++ 'to text TEXT NOT NULL, '
++ 'presentLocation TEXT NOT NULL'
++ 'price DECIMAL(600, 3) NOT NULL'
++ 'status text TEXT NOT NULL )'
 + 'PRIMARY KEY (parcelID)'
 + 'FOREIGN KEY (userID) REFERENCES users(userID)'
 + ');';
 
 const createUsersTableQuery = 'CREATE TABLE users IF NOT EXISTS('
-+ 'userID INT not null AUTO_INCREMENT,'
-+ 'name VARCHAR(100) not null, '
-+ 'email VARCHAR(100) not null, '
-+ 'username VARCHAR(100) not null, '
-+ 'password VARCHAR(100) not null, '
-+ 'right VARCHAR(100) not null, '
-+ 'PRIMARY KEY (userID)'
++ 'userID INT PRIMARY KEY,'
++ 'name TEXT NOT NULL, '
++ 'email TEXT NOT NULL, '
++ 'username TEXT NOT NULL, '
++ 'password TEXT NOT NULL, '
++ 'right TEXT NOT NULL, '
 + 'FOREIGN KEY (parcelID) REFERENCES parcels(parcelID)'
 + ');';
 
@@ -68,9 +64,9 @@ const pool = new Pool({
 });
 
 
-const connect = async () => pool.connect();
+//const connect = async () => pool.connect();
 
-const execute = async (sql, data = []) => {
+/*const execute = async (sql, data = []) => {
   const connection = await connect();
   try {
     return await connection.query(sql, data);
@@ -79,9 +75,38 @@ const execute = async (sql, data = []) => {
   } finally {
     connection.release();
   }
-};
+}; */
 
+pool.on('connect', () => {
+  console.log('connected to the db');
+});
 
-async () => await execute(createtParcelsTableQuery);
-async () => await execute(createUsersTableQuery);
-module.exports = { execute, parcels, users };
+/**
+ * Create Tables
+ */
+const createParcels = () => {
+  pool.query(createtParcelsTableQuery)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+}
+const createUsers = () => {
+  pool.query(createtParcelsTableQuery)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+}
+
+//async () => await execute(createtParcelsTableQuery);
+//async () => await execute(createUsersTableQuery);
+module.exports = { createParcels, createUsers, parcels, users };

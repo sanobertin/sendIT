@@ -6,13 +6,13 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-jwtkey = process.env.jwtkey;
-router.get('/api/v1/users/:userID/', (req, res) => { // Working
+let jwtkey = process.env.jwtkey;
+
+router.get('/:userID/', (req, res) => { // Working
   userID = req.params.userID;
   for (let a = 0; a < users.length; a++) {
     while (userID == users[a].username) {
-      // console.log(`${users[a].username} fetched!!`);
-      res.status(200).json(users[a]);
+      res.status(200).json({user: users[a]});
     }
     // else { res.status(404).json({message: 'user does not exist'}).end()}
   }
@@ -26,7 +26,7 @@ router.get('/api/v1/users/:userID/', (req, res) => { // Working
 });
 // let getSpecificUserQuery= `SELECT * from parcels where userID=${userID}`;
 
-router.get('/api/v1/users/:userID/parcels', (req, res) => { // working **2
+router.get('/:userID/parcels', (req, res) => { // working **2
   userID = req.params.userID;
   const temp = [];
   for (let a = 0; a < users.length; a++) {

@@ -6,22 +6,22 @@ const parcels = require('../models/db').parcels;
 const users = require('../models/db').users;
 const path = require('path');
 
-router.get('/api/v1/', (req, res) => {
+router.get('', (req, res) => {
  	res.sendFile('index.html', { root: './UI' });
 });
 
-router.get('/api/v1/profile', (req, res) => {
+router.get('/profile', (req, res) => {
  	// console.log('GET: profile');
  	res.sendFile('profile.html', { root: './UI' });
 });
 
-router.get('/api/v1/admin', (req, res) => {
+router.get('/admin', (req, res) => {
  	console.log('GET: admin');
  	res.sendFile('admin.html', { root: './UI' });
 });
 
 
-router.route('/api/v1/signup')
+router.route('/signup')
 
   .get((req, res) => {
     	console.log('GET: signup page');
@@ -43,7 +43,7 @@ router.route('/api/v1/signup')
     res.end();
   });
 
-router.route('/api/v1/signin')
+router.route('/signin')
   .get((req, res) => {
     res.sendFile('signin.html', { root: './UI' });
   });
