@@ -3,7 +3,7 @@ node_js: node
 before_script: 
   - npm install
   - createdb sendit
-  - pg_dump sendit < ./sendit.backup
+  - psql sendit < sendit.backup
 services:
   - postgresql
 
