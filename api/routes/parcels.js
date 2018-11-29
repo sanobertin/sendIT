@@ -1,70 +1,116 @@
-const express = require('express');
+
+const express= require('express');
 const router = express.Router();
-const parcels = require('../models/db').parcels;
-const users = require('../models/db').users;
-const jwt = require('jsonwebtoken');
-const uuid = require('uuid/v1');
 router.use(express.json());
+const execute = require('../models/db').execute
+//import jwt from 'jsonwebtoken'
+
+//import dotenv from 'dotenv'
 require('dotenv').config();
 
-jwtkey = process.env.jwtkey;
+const jwtkey = process.env.jwtkey;
 
-router.get('', (req, res) => { 
-  if (!parcels) {
+router.get('', async(req, res) => {
+  const getAllParcelsQuery= 'SELECT * from parcels'; 
+  let parcels= await execute(getAllParcelsQuery);
+  if (!parcels.rowCount) {
     res.status(404).json({ message: 'no parcels found' });
   } else {
     // token= jwt.sign({parcels}, jwtkey, { expiresIn: '1h' })
-  	res.status(200).json({parcels : parcels});
+  	res.status(200).json({parcels : parcels.rows});
   }
 });
-// const getAllParcelsQuery= 'SELECT * from parcels';
 
-router.post('', (req, res) => { 
-  let newParcel = req.body.parcel; 
+router.post('', async(req, res) => { 
+  let newParcel = req.body.parcel;
+  let createNewParcelQuery=`INSERT INTO parcels
+   (owne, parcelName, fromlocation, tolocation, presentlocation, price, status)
+   VALUES ('${newParcel.owne}', '${newParcel.parcelName}', '${newParcel.fromlocation}',
+    '${newParcel.tolocation}','${newParcel.presentlocation}', ${parseInt(newParcel.price)},
+     '${'In Transit'}' )`;
+  
   if (!newParcel) {
-    res.status(404).json({ message: 'Empty object!' });
+    res.status(404).json({ message: 'Empty object or invalid data!' });
   } else {
-    parcels.push(newParcel);
-    res.status(201).json({ message: 'Created', parcel: newParcel });
+    let resp= await execute(createNewParcelQuery);
+    res.status(201).json({ message: 'Created'});
   }
 });
-// let createNewParcelQuery=`INSERT INTO parcels () VALUES ()`; //not ending
 
-router.get('/:parcel_ID', (req, res) => { 
+router.get('/:parcel_ID', async(req, res) => { 
   parcel_ID = parseInt(req.params.parcel_ID);
-  const fetched_parcel = parcels.find(parcel => parcel.parcelID === parcel_ID);
-  if (!fetched_parcel) {
+  let getSpecificParcelQuery= `SELECT * from parcels where parcelid=${parcel_ID}`;
+  let fetched_parcel = await execute(getSpecificParcelQuery);
+  if (!fetched_parcel.rowCount) {
   	res.status(404).json({ message: 'Such a parcel not found' });
   } else {
     res.status(200).json({parcel:fetched_parcel});
   }
 });
-// let getSpecificParcelQuery= `SELECT * from parcels where id=${parcel_ID}`;
 
-router.put('/:parcel_ID/cancel', (req, res) => {
-  parcel_ID = parseInt(req.params.parcel_ID);
-  const fp = parcels.find(parcel => parcel.parcelID === parcel_ID);
-  if (!fp) {
+
+router.put('/:parcel_ID/cancel', async (req, res) => {
+  let parcel_ID = parseInt(req.params.parcel_ID);
+  let getSpecificParcelQuery= `SELECT * from parcels where parcelid=${parcel_ID}`;
+  let updateSpecificParcelStatusQuery=`UPDATE parcels set status='Canceled' where parcelid=${parcel_ID}`
+  let fetchedParcel = await execute(getSpecificParcelQuery);
+  if (!fetchedParcel.rowCount) {
     res.status(404).json({ message: 'Parcel not found' });
-  } else if (fp.status !== 'In transit') {
+  } else if (fetchedParcel.rows[0].status !== 'In transit') {
     res.status(404).json({ message: 'Parcel either Delivered or already canceled' });
   } else {
-    fp.status = 'Canceled';
-    res.status(200).json({ message: 'Successfully updated', parcel:fp }); 
+    let resp= await execute(updateSpecificParcelStatusQuery);
+    res.status(200).json({ message: 'Successfully updated'}); 
   }
 });
-router.put('/:parcelID/destination', (req, res) => {
-  // change the location of a specific parcel order
+router.put('/:parcelID/destination', async (req, res) => {
+  //user who created this parcel are only allowed to edit
+  let user= req.body.user;
+  let newDestination= req.body.destination;
+  let parcel_ID = parseInt(req.params.parcelID);
+  let updateSpecificDestinationQuery=`UPDATE parcels set tolocation='${newDestination}' where parcelid='${parcel_ID}';`
+  let checkQuery= `select distinct parcelid, owne, parcelname, fromlocation, 
+  tolocation, presentlocation, price, status, parcels.date_created 
+  from parcels,users where parcels.owne= '${user}';`
+  let check= await execute(checkQuery)
+  if(!check.rowCount){
+    res.status(404).json({message:'Something wrong happens!'})
+  } else {
+    const update= await execute(updateSpecificDestinationQuery);
+    res.status(200).json({message: 'Successfully update'})
+  }
+  
+  let getSpecificParcelQuery= `SELECT * from parcels where parcelid=${parcel_ID}`;
 });
-// let updateSpecificDestinationQuery=`UPDATE parcels set destination=${newDestination} where id=${parcel_ID}`
-router.put('/:parcelID/status', (req, res) => { // accessible by admins only
+router.put('/:parcelID/status', async (req, res) => { //
+  // accessible by admins only
   // change the status of a specific parcel order
+  let user= req.body.user
+  let newStatus= req.body.status;
+  let parcelID = parseInt(req.params.parcelID);
+  if(user!=='admin'){
+    res.status(403).json({message:'Unauthorized user denied.'});
+  } else {
+    const updateStatusQuery=`UPDATE parcels set status='${newStatus}' where parcelid=${parcelID};`
+    await execute(updateStatusQuery);
+    res.status(200).json({message: 'Successful updated!'})
+  }
 });
-// let updateSpecificParcelStatusQuery=`UPDATE parcels set status=${newStatus} where id=${parcel_ID}`
+//
 
-router.put('/:parcelID/presentLocation', (req, res) => { // accessible by admins only
-  // change the status of a specific parcel order
+router.put('/:parcelID/presentLocation', async(req, res) => { 
+  // accessible by admins only
+  let user= req.body.user;
+  let presentloc= req.body.location;
+  let parcelID= parseInt(req.params.parcelID);
+  let updateSpecificPresentlocQuery=`UPDATE parcels set presentLocation='${presentloc}' where parcelid=${parcelID};`
+  if(user !=='admin'){
+    res.status(403).json({message:'Unauthorized user denied.'})
+  }
+  else {
+    await execute(updateSpecificPresentlocQuery);
+    res.status(200).json({message:'Present location updated'});
+  }
 });
-// let updateSpecificPresentlocQuery=`UPDATE parcels set presentLocation=${presentloc} where id=${parcel_ID}`
 
 module.exports = router;

@@ -1,10 +1,7 @@
-const express = require('express');
-
+const express= require('express')
+const path= require('path')
 const router = express.Router();
-const bodyparser = require('body-parser').json();
-const parcels = require('../models/db').parcels;
 const users = require('../models/db').users;
-const path = require('path');
 
 router.get('', (req, res) => {
  	res.sendFile('index.html', { root: './UI' });
@@ -36,9 +33,6 @@ router.route('/signup')
     const usern = req.params.usern;
     const pass = req.params.pass;
     const rights = 'normal';
-    fs.appendFile('users.txt', JSON.stringify({
-      name: _name, email: mail, usernname: usern, password: pass, right: rights,
-    }), (error) => { if (error) console.log(error); });
     res.status(200).json({ message: ' Succeed!' });
     res.end();
   });

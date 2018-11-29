@@ -16,21 +16,28 @@ GET: /api/v1/users/&lt;usersId&gt;/parcels  <b>Fetch all parcel delivery orders 
 PUT: /api/v1/parcels/&lt;parcelID&gt;/cancel <b>Cancel the specific parcel delivery order</b><br />
 POST: /api/v1/parcels       <b>Create a parcel delivery order</b><br />
 {
-	"parcel" : { 
-		"parcelID": 5, 
-		"owner": "bertin", 
-		"parcelName": "Parcel 5", 
-		"from": "Musanze", 
-		"to": "Rubavu", 
-		"status": "In transit"
+	"parcel":{
+		"owne":"bertin", 
+		"parcelName":"parcel 6", 
+		"fromlocation":"kigali", 
+		"tolocation":"rulindo", 
+		"presentlocation":"kigali", 
+		"price": 5000
 		
 	}
 }
 PUT: /api/v1/parcels/&lt;parcelID&gt;/destination       <b>Changing destination of a parcel order</b><br />
 PUT: /api/v1/parcels/&lt;parcelID&gt;/status        <b>Changing the status of a parcel order</b><br />
 PUT: /api/v1/parcels/&lt;/:parcelID&gt;/presentLocation     <b>Changing the present location of a parcel order</b><br />
-POST: /api/v1/auth/signup       <b>Securely Sign up</b><br />
-POST: /api/v1/auth/         <b>Securely Log in</b><br />
+POST: /auth/signup       <b>Securely Sign up</b><br />
+{
+	"name":"test",
+	"email":"test@andela.com",
+	"username":"test",
+	"password":"test"
+}
+	
+POST: /auth/login        <b>Securely Log in</b><br />
 API access site: https://sendit3.herokuapp.com/ </b><br />
 
 Running the application <br />
