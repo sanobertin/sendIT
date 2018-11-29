@@ -15,7 +15,6 @@ app.use(express.static(path.join(`${__dirname}/UI`)));
 app.set('views', path.join(`${__dirname}/UI`)); // specify the views directory
 
 
-
 app.get('/test', async (req, res)=> {
   l//
 })

@@ -2,6 +2,8 @@ const express= require('express')
 const router = express.Router();
 router.use(express.json());
 const execute = require('../models/db').execute
+const jwt= require('jsonwebtoken');
+require('dotenv').config()
 
 const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 router.post('/signup', async (req, res) => {
@@ -22,8 +24,16 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.post('/login', (req, res) => {
-    // new rules for logging in a user
+router.post('/login', async (req, res) => {  
+  const user= req.body.user;
+  const password= req.body.password;
+  const check = await execute(`select * from users where users.username='${user}' AND users.pass='${password}';`);
+  if(check.rowCount){
+    res.status(200).json({message: 'Logged in', user:check.rows});
+  } else {
+    console.log('loggin failed')
+    res.status(401).json({message:'Loggin failed'})
+  }
   });
 
 

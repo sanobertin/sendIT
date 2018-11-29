@@ -20,15 +20,22 @@ pool.on('connect', () => {
 
 // got inspiration from https://www.codementor.io/olawalealadeusi896/building-a-simple-api-with-nodejs-expressjs-and-postgresql-db-masuu56t7
 function execute (sql, data=[]){
-  return new Promise((resolve, reject) =>{
-    pool.query(sql)
-    .then((res) =>{
-      resolve(res);
+  try {
+    return new Promise((resolve, reject) =>{
+      pool.query(sql)
+      .then((res) =>{
+        resolve(res);
+      })
+      .catch((err) =>{
+        reject(err);
+      })
     })
-    .catch((err) =>{
-      reject(err);
-    })
-  })
+  } catch(error){
+    console.log(error.message)
+  } finally{
+    console.log('')
+  }
+  
   
 }
 

@@ -11,11 +11,15 @@ provides courier quotes based on weight categories.<br />
 Access to all API endpoints<br />
 
 GET: /api/v1/parcels   <b>Fetch all parcel delivery orders</b><br />
+
 GET: /api/v1/parcels/&lt;parcelId&gt;   <b>Fetch a specific parcel delivery order</b><br />
+
 GET: /api/v1/users/&lt;usersId&gt;/parcels  <b>Fetch all parcel delivery orders by a specific user</b><br />
+
 PUT: /api/v1/parcels/&lt;parcelID&gt;/cancel <b>Cancel the specific parcel delivery order</b><br />
+
 POST: /api/v1/parcels       <b>Create a parcel delivery order</b><br />
-{
+<pre>{
 	"parcel":{
 		"owne":"bertin", 
 		"parcelName":"parcel 6", 
@@ -25,24 +29,44 @@ POST: /api/v1/parcels       <b>Create a parcel delivery order</b><br />
 		"price": 5000
 		
 	}
-}
+} </pre>
+
 PUT: /api/v1/parcels/&lt;parcelID&gt;/destination       <b>Changing destination of a parcel order</b><br />
-PUT: /api/v1/parcels/&lt;parcelID&gt;/status        <b>Changing the status of a parcel order</b><br />
+<pre>{
+	"user":"bertin",
+	"destination":"Ruhango"
+}</pre>
+
+PUT: /api/v1/parcels/&lt;parcelID&gt;/status        <b>Admins can change the status of a parcel order</b><br />
+<pre>{
+	"user":"admin",
+	"status":"Delivered"
+}</pre>
 PUT: /api/v1/parcels/&lt;/:parcelID&gt;/presentLocation     <b>Changing the present location of a parcel order</b><br />
+<pre>{
+	"user":"bertin",
+	"location":"Pretoria"
+}</pre>
+
 POST: /auth/signup       <b>Securely Sign up</b><br />
-{
+<pre>{
 	"name":"test",
 	"email":"test@andela.com",
 	"username":"test",
 	"password":"test"
-}
+}</pre>
 	
 POST: /auth/login        <b>Securely Log in</b><br />
+<pre>{
+	"user":"test",
+	"password":"test"
+}</pre>
+
 API access site: https://sendit3.herokuapp.com/ </b><br />
 
-Running the application <br />
+Running the app<br />
 clone the repo :<br />
-cd sendIT <br />
+cd sendit <br />
 run: npm start<br />
 run: npm test  for test development <br />
 

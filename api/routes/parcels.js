@@ -3,7 +3,7 @@ const express= require('express');
 const router = express.Router();
 router.use(express.json());
 const execute = require('../models/db').execute
-//import jwt from 'jsonwebtoken'
+const jwt = require('jsonwebtoken');
 
 //import dotenv from 'dotenv'
 require('dotenv').config();
@@ -16,8 +16,34 @@ router.get('', async(req, res) => {
   if (!parcels.rowCount) {
     res.status(404).json({ message: 'no parcels found' });
   } else {
-    // token= jwt.sign({parcels}, jwtkey, { expiresIn: '1h' })
   	res.status(200).json({parcels : parcels.rows});
+  }
+});
+
+router.get('/:parcel_ID', async(req, res) => { 
+  parcel_ID = parseInt(req.params.parcel_ID);
+  let getSpecificParcelQuery= `SELECT * from parcels where parcelid=${parcel_ID}`;
+  let fetched_parcel = await execute(getSpecificParcelQuery);
+  if (!fetched_parcel.rowCount) {
+  	res.status(404).json({ message: 'Such a parcel not found' });
+  } else {
+    res.status(200).json({parcel:fetched_parcel.rows});
+  }
+});
+
+router.put('/:parcel_ID/cancel', async (req, res) => {
+  let parcel_ID = parseInt(req.params.parcel_ID);
+  let getSpecificParcelQuery= `SELECT * from parcels where parcelid=${parcel_ID}`;
+  let updateSpecificParcelStatusQuery=`UPDATE parcels set status='Canceled' where parcelid=${parcel_ID}`
+  let fetchedParcel = await execute(getSpecificParcelQuery);
+  if (!fetchedParcel.rowCount) {
+    res.status(404).json({ message: 'Parcel not found' });
+  } else if (fetchedParcel.rows.status !== 'In transit') {
+    res.status(404).json({ message: 'Parcel either Delivered or already canceled' });
+  } else {
+    let resp= await execute(updateSpecificParcelStatusQuery);
+    const parcel= await execute(`select * from parcels where parcelid=${parcel_ID}`);
+    res.status(200).json({ message: 'Successfully updated', parcel: parcel.rows}); 
   }
 });
 
@@ -33,36 +59,15 @@ router.post('', async(req, res) => {
     res.status(404).json({ message: 'Empty object or invalid data!' });
   } else {
     let resp= await execute(createNewParcelQuery);
-    res.status(201).json({ message: 'Created'});
-  }
-});
-
-router.get('/:parcel_ID', async(req, res) => { 
-  parcel_ID = parseInt(req.params.parcel_ID);
-  let getSpecificParcelQuery= `SELECT * from parcels where parcelid=${parcel_ID}`;
-  let fetched_parcel = await execute(getSpecificParcelQuery);
-  if (!fetched_parcel.rowCount) {
-  	res.status(404).json({ message: 'Such a parcel not found' });
-  } else {
-    res.status(200).json({parcel:fetched_parcel});
+    const parcel= await execute('SELECT * FROM parcels ORDER BY parcelid DESC LIMIT 1;');
+    res.status(201).json({ message: 'Created', parcel: parcel.rows});
   }
 });
 
 
-router.put('/:parcel_ID/cancel', async (req, res) => {
-  let parcel_ID = parseInt(req.params.parcel_ID);
-  let getSpecificParcelQuery= `SELECT * from parcels where parcelid=${parcel_ID}`;
-  let updateSpecificParcelStatusQuery=`UPDATE parcels set status='Canceled' where parcelid=${parcel_ID}`
-  let fetchedParcel = await execute(getSpecificParcelQuery);
-  if (!fetchedParcel.rowCount) {
-    res.status(404).json({ message: 'Parcel not found' });
-  } else if (fetchedParcel.rows[0].status !== 'In transit') {
-    res.status(404).json({ message: 'Parcel either Delivered or already canceled' });
-  } else {
-    let resp= await execute(updateSpecificParcelStatusQuery);
-    res.status(200).json({ message: 'Successfully updated'}); 
-  }
-});
+
+
+
 router.put('/:parcelID/destination', async (req, res) => {
   //user who created this parcel are only allowed to edit
   let user= req.body.user;
