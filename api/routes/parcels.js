@@ -43,7 +43,7 @@ router.put('/:parcel_ID/cancel', async (req, res) => {
   } else {
     let resp= await execute(updateSpecificParcelStatusQuery);
     const parcel= await execute(`select * from parcels where parcelid=${parcel_ID}`);
-    res.status(200).json({ message: 'Successfully updated', parcel: parcel.rows}); 
+    res.status(202).json({ message: 'Successfully updated', parcel: parcel.rows}); 
   }
 });
 
@@ -82,7 +82,7 @@ router.put('/:parcelID/destination', async (req, res) => {
     res.status(404).json({message:'Something wrong happens!'})
   } else {
     const update= await execute(updateSpecificDestinationQuery);
-    res.status(200).json({message: 'Successfully update'})
+    res.status(202).json({message: 'Successfully update'})
   }
   
   let getSpecificParcelQuery= `SELECT * from parcels where parcelid=${parcel_ID}`;
@@ -98,7 +98,7 @@ router.put('/:parcelID/status', async (req, res) => { //
   } else {
     const updateStatusQuery=`UPDATE parcels set status='${newStatus}' where parcelid=${parcelID};`
     await execute(updateStatusQuery);
-    res.status(200).json({message: 'Successful updated!'})
+    res.status(202).json({message: 'Successful updated!'})
   }
 });
 //
@@ -114,7 +114,7 @@ router.put('/:parcelID/presentLocation', async(req, res) => {
   }
   else {
     await execute(updateSpecificPresentlocQuery);
-    res.status(200).json({message:'Present location updated'});
+    res.status(202).json({message:'Present location updated'});
   }
 });
 
