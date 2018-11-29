@@ -11,16 +11,13 @@ router.post('/signup', async (req, res) => {
   const username = req.body.username;
   const pass = req.body.password;
   const check = await execute(`select * from users where users.username='${username}';`);
-  console.log(check.rowCount);
   const createNewUserQuery = `INSERT INTO users(name, email, username, pass, rights)  
   VALUES('${name}', '${email}', '${username}', '${pass}', '${rights}');`;
   if (check.rowCount) {
-    console.log('check failed');
     res.status(404).json({ message: 'Username already exists' });
   } else {
-    console.log('check succes');
     await execute(createNewUserQuery);
-    const user = await execute(`select * from users where username=${username};`);
+    const user = await execute(`select * from users where username='${username}';`);
     res.status(201).json({ message: 'User Created', user: user.rows });
   }
 });
