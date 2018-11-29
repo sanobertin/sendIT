@@ -66,11 +66,7 @@ describe("GET/ all parcels from a particular user", function() {
 }); 
 
 describe("PUT/ Change the status of a parcel", () => { 
-	it("should return status 200", (done) =>{
-		request.put(base_url+'/parcels/5/cancel', (error, response, body) => {
-            expect(response.statusCode).to.be(200);
-            done();})
-    });
+
     it('should have property message', (done)=>{
         request.put(base_url+'/parcels/5/cancel', (error, response, body) =>{
             expect(JSON.parse(response.body)).to.have.property('message'); 
