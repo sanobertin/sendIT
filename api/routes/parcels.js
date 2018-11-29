@@ -3,12 +3,11 @@ const express= require('express');
 const router = express.Router();
 router.use(express.json());
 const execute = require('../models/db').execute
-const jwt = require('jsonwebtoken');
 
 //import dotenv from 'dotenv'
 require('dotenv').config();
 
-const jwtkey = process.env.jwtkey;
+
 
 router.get('', async(req, res) => {
   const getAllParcelsQuery= 'SELECT * from parcels'; 

@@ -2,7 +2,6 @@ const express= require('express')
 const router = express.Router();
 router.use(express.json());
 const execute = require('../models/db').execute
-const jwt= require('jsonwebtoken');
 require('dotenv').config()
 
 const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
