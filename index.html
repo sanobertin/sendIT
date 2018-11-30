@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="shortcut icon" href="pictures/logo.png" />
+	<link rel="stylesheet" href="css/design.css">
+	<title>User's Home</title>
+</head>
+<body>
+	<div class="header">
+		<span><img alt="logo" src="./pictures/logo.png"></span>
+		<span class="header-words">Ship your parcels in simple and flexible way</span>
+	</div>
+	<div class="tabbed-area">
+		<div class="tabs-container">
+			<ul class="tabs group">
+				<li><a href='#new_order'>Create a new parcel delivery order</a></li>
+				<li><a href='#my_orders'>My orders</a></li>
+			</ul>
+		</div>		
+
+		<div class="div-wrap">
+			<div id="new_order">
+				<form>
+					<label>Pickup location:</label><br>
+					<input class="input_size" id="pickup_loc" required="required"><br>
+					<label>Destination:</label><br>
+					<input class="input_size" id="destination_loc" required="required"><br>
+					<label>Parcel name</label><br>
+					<input type="text" class="input_size" required="required"><br>
+					<label>Weight</label><br>
+					<input type="number" class="input_size"><br>
+					<button class="input_size button-css"><span>Get Quotes</span></button>
+
+				</form>
+			</div>
+			<div id='my_orders'>
+				<table id="order_table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Owner</th>
+							<th>Parcel Name</th>
+							<th>Pickup Location</th>
+							<th>Destination</th>
+							<th>Present Location</th>
+							<th>Price</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr>
+								<td>Parcel 1</td>
+								<td>Owner name 1</td>
+								<td>Parcel Name 1</td>
+								<td>Pickup Location</td>
+								<td>Destination</td>
+								<td>Present Location</td>
+								<td>Price</td>
+								<td>Status</td>
+							</tr>
+							<tr>
+									<td>Parcel 1</td>
+									<td>Owner name 1</td>
+									<td>Parcel Name 1</td>
+									<td>Pickup Location</td>
+									<td>Destination</td>
+									<td>Present Location</td>
+									<td>Price</td>
+									<td>Status</td>
+							</tr>
+							<tr>
+									<td>Parcel 1</td>
+									<td>Owner name 1</td>
+									<td>Parcel Name 1</td>
+									<td>Pickup Location</td>
+									<td>Destination</td>
+									<td>Present Location</td>
+									<td>Price</td>
+									<td>Status</td>
+								</tr>
+								<tr>
+										<td>Parcel 1</td>
+										<td>Owner name 1</td>
+										<td>Parcel Name 1</td>
+										<td>Pickup Location</td>
+										<td>Destination</td>
+										<td>Present Location</td>
+										<td>Price</td>
+										<td>Status</td>
+								</tr>
+					</tbody>
+					
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+
+	<div id="order_details">
+		<p> View a particular parcel order</p>
+		<p><span>Parcel 2 (Order name</span>, <span>Status</span>, <span>Pickup location</span>, <span>present location</span>, <span>Destination)</span></p>
+
+		<p>
+			<span><button class="button-css">Change Destination</button></span>
+			<span><button class="button-css">Cancel this order</button></span>
+		</p>
+
+		
+	</div>
+<footer class='footer'>sendIT	© 	2018</footer>
+</body>
+</html>
