@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/sanobertin/sendIT/",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "dotenv": "^6.1.0",
     "expect.js": "^0.3.1",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "i": "^0.3.6",
     "jsonwebtoken": "^8.4.0",
     "mocha": "^5.2.0",
